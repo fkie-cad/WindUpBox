@@ -1,9 +1,0 @@
-Command Line Interface (CLI)
-****************************
-
-This section contains information about the commands
-
-.. toctree::
-
-    boxcreate
-    update

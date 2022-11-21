@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>download of the system image &mdash; &#39;windupbox&#39;  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> 'windupbox'
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basicusage/index.html">How to create a Windows Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../functionality/index.html">A short insight into the box creation process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">How to create a boxcreator class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../addosoption/index.html">How to add an os specification to the os option list</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">'windupbox'</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>download of the system image</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/boxclasscreation/boxcreation_steps/download.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="download-of-the-system-image">
+<h1>download of the system image<a class="headerlink" href="#download-of-the-system-image" title="Permalink to this heading"></a></h1>
+<p>For the download of the system image overload the _download_image method, that will download the system image and add the necessary builder configuration variables.
+We therefore first need to find the location where to place the system image.
+This can be done by using the _get_image_path method provided by the BoxCreator baseclass.
+Then you can download the image and set the attribute image to the filepath of the downloaded file.
+Because packer wants the sha256 checksum of the image, we then calculate the sha256 checksum by calling the _get_image_sha256checksum method, which is also provided by the BoxCreator baseclass.
+In a next step we determine the path of the image relative to our project directory, because this is needed for the packerfile.
+As a last step we add this relative path as well as the checksum of the iso to the builder configuration variables.
+The resulting code then looks something like the following:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># external imports</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># internal imports</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">windupbox.boxcreator.boxcreator</span> <span class="kn">import</span> <span class="n">BoxCreator</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">windupbox.winconstants.windowsinfo</span> <span class="kn">import</span> <span class="n">WindowsInfo</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="c1"># configure logging</span>
+<span class="linenos"> 9</span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="linenos">10</span><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="k">class</span> <span class="nc">CustomBoxCreator</span><span class="p">(</span><span class="n">BoxCreator</span><span class="p">):</span>
+<span class="linenos">14</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxdirectory</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+<span class="linenos">15</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">boxdirectory</span><span class="p">)</span>
+<span class="linenos">16</span>        <span class="c1"># you can be place methods that add provisioners, add builder configuration variables or create additional files here</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>    <span class="k">def</span> <span class="nf">_download_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">20</span>        <span class="n">filepath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_image_path</span><span class="p">()</span>
+<span class="linenos">21</span>        <span class="n">downloader</span> <span class="o">=</span> <span class="n">WindowsDownloader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">windows_info</span><span class="p">)</span>
+<span class="linenos">22</span>        <span class="n">downloader</span><span class="o">.</span><span class="n">download_iso</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+<span class="linenos">23</span>        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">filepath</span>
+<span class="linenos">24</span>        <span class="bp">self</span><span class="o">.</span><span class="n">image_sha256checksum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_image_sha256checksum</span><span class="p">()</span>
+<span class="linenos">25</span>        <span class="n">iso_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_directory</span><span class="p">)</span>
+<span class="linenos">26</span>        <span class="bp">self</span><span class="o">.</span><span class="n">source_attributes</span><span class="p">[</span><span class="s1">&#39;iso_urls&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">iso_url</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()]</span>
+<span class="linenos">27</span>        <span class="bp">self</span><span class="o">.</span><span class="n">source_attributes</span><span class="p">[</span><span class="s1">&#39;iso_checksum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;sha256:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">image_sha256checksum</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span>    <span class="k">def</span> <span class="nf">create_box</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">31</span>        <span class="c1"># if you have methods that should be done not in the initialization but right before the box creation, you can place them here</span>
+<span class="linenos">32</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">create_box</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>As already mentioned before, there is no need to call the _download_image method here due to the fact that it is called by the BoxCreator baseclass.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, FKIE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

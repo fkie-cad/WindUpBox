@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>specify os &mdash; &#39;windupbox&#39;  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> 'windupbox'
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basicusage/index.html">How to create a Windows Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../functionality/index.html">A short insight into the box creation process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">How to create a boxcreator class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../addosoption/index.html">How to add an os specification to the os option list</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">'windupbox'</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>specify os</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/boxclasscreation/boxcreation_steps/specifyos.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="specify-os">
+<h1>specify os<a class="headerlink" href="#specify-os" title="Permalink to this heading"></a></h1>
+<p>It is important to specify for which os and which version your boxcreator class should be used.
+To better understand how this is done properly we shortly explain how the tool chooses a boxcreator class for the input given in the command line interface.</p>
+<p>If a user run the tool, it provide them a list of os, versions, editions and so on.
+These data will be stored in an instance of the so called OsInfo class and determines which boxcreator class will be used for the box creation.
+Each boxcreator class contains an instance of the so called OsInfoFilter class, which is used to specify which os given through their OsInfo match with the filter.
+Therefore the OsInfoFilter has a method called match, which returns whether the OsInfo matches the filter.
+Additionally it provides the information how precise it matches the filter.</p>
+<p>For specific os, the characteristic data can vary.
+Therefore we work with childs of the OsInfo and OsInfoFilter class for certain os.
+So far the tool supports only windows, where the regarding classes are called WindowsInfo and WindowsInfoFilter.
+All this classes are located in the <code class="docutils literal notranslate"><span class="pre">src/windupbox/osinfo/</span></code> module.</p>
+<p>As an example let us say we just have two boxcreator called Windows10_21H1BoxCreator and Windows10_BoxCreator.
+In the Windows10_21H1BoxCreator class the os_info_filter has the value <code class="docutils literal notranslate"><span class="pre">WindowsInfoFilter(windows_version=['Windows</span> <span class="pre">10'],</span> <span class="pre">version=['21H1'])</span></code> while the Windows10_BoxCreator os_info_filter attribute is <code class="docutils literal notranslate"><span class="pre">WindowsInfoFilter(windows_version=['Windows</span> <span class="pre">10'])</span></code>.
+If the user now chooses any os_info containing ‘Windows 10’ as the windows version and ‘21H1’ as the version the Windows10_21H1BoxCreator class will be used, due to the fact it matches more precise.
+Accordingly if the user chooses any os_info containing ‘Windows 10’ and another windows version the Windows10_BoxCreator will be used.
+This provides the possibility to build a flexible structure, which allows small adjustments in the installation process for certain versions.</p>
+<p>If you create a new boxcreator class it may be needed for you to add options to the os selection in the command line interface.
+An tutorial on how to do that can be found <a class="reference internal" href="../../addosoption/index.html#how-to-add-an-os-specification-to-the-os-option-list"><span class="std std-ref">here</span></a>.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, FKIE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

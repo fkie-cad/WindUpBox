@@ -29,7 +29,7 @@ author = 'FKIE'
 # ones.
 extensions = [
     'myst_parser',
-    'sphinx.ext.autodoc',
+    #'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.autosectionlabel',
 ]
