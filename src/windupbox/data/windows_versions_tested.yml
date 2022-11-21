@@ -1,0 +1,204 @@
+Windows 10:
+  '1507':
+    build: '10240.16384'
+    editions:
+      Education: false
+      Education N: false
+      Home: true
+      Home N: false
+      Pro: false
+      Pro N: false
+      Single Language: false
+    release: '2015.07'
+    version: '1507'
+  1511 R1:
+    build: '10586.0'
+    editions:
+      Education: false
+      Education N: false
+      Home: false
+      Home N: false
+      Pro: false
+      Pro N: false
+      Single Language: false
+    release: '2015.11'
+    version: 1511 R1
+  1511 R2:
+    build: '10586.104'
+    editions:
+      Education: false
+      Education N: false
+      Home: false
+      Home N: false
+      Pro: false
+      Pro N: false
+      Single Language: false
+    release: '2016.02'
+    version: 1511 R2
+  1511 R3:
+    build: '10586.164'
+    editions:
+      Education: false
+      Education N: false
+      Home: false
+      Home N: false
+      Pro: false
+      Pro N: false
+      Single Language: false
+    release: '2016.04'
+    version: 1511 R3
+  '1607':
+    build: '14393.0'
+    editions:
+      Education: false
+      Education N: false
+      Home: false
+      Home N: false
+      Pro: false
+      Pro N: false
+      Single Language: false
+    release: '2016.07'
+    version: '1607'
+  '1703':
+    build: '15063.0'
+    editions:
+      Education: false
+      Education N: false
+      Home: false
+      Home N: false
+      Pro: false
+      Pro N: false
+      Single Language: false
+    release: '2017.03'
+    version: '1703'
+  '1709':
+    build: '16299.15'
+    editions:
+      Education: false
+      Home: false
+      Pro: false
+    release: '2017.09'
+    version: '1709'
+  '1803':
+    build: '17134.1'
+    editions:
+      '1803': false
+      Education: false
+      Home: false
+      Pro: false
+    release: '2018.04'
+    version: '1803'
+  1809 R1:
+    build: '17763.1'
+    editions:
+      Education: false
+      Home: false
+      Pro: false
+    release: '2018.09'
+    version: 1809 R1
+  1809 R2:
+    build: '17763.107'
+    editions:
+      Education: false
+      Home: false
+      Pro: false
+    release: '2018.10'
+    version: 1809 R2
+  1809 R3:
+    build: '17763.379'
+    editions:
+      Education: false
+      Home: false
+      Pro: false
+    release: '2019.03'
+    version: 1809 R3
+  19H1 2019.05:
+    build: '18362.30'
+    editions:
+      Education: false
+      Home: false
+      Pro: false
+    release: '2019.05'
+    version: 19H1 2019.05
+  19H1 2019.09:
+    build: '18362.356'
+    editions:
+      Education: false
+      Home: false
+      Pro: false
+    release: '2019.09'
+    version: 19H1 2019.09
+  19H2:
+    build: '18363.418'
+    editions:
+      Education: false
+      Home: false
+      Pro: false
+    release: '2019.11'
+    version: 19H2
+  20H1:
+    build: '19041.264'
+    editions:
+      Education: false
+      Home: false
+      Pro: false
+    release: '2020.05'
+    version: 20H1
+  20H2 2020.10:
+    build: '19042.508'
+    editions:
+      Education: false
+      Home: false
+      Pro: false
+    release: '2020.10'
+    version: 20H2 2020.10
+  21H1:
+    build: '19043.985'
+    editions:
+      Education: false
+      Home: true
+      Pro: true
+    release: '2021.05'
+    version: 21H1
+  21H2:
+    build: '19044.1288'
+    editions:
+      Education: false
+      Home: false
+      Pro: true
+    release: '2021.11'
+    version: 21H2
+Windows 11:
+  21H2:
+    build: '22000.194'
+    editions:
+      Edu: false
+      Home: false
+      Pro: false
+    release: '2021.10'
+    version: 21H2
+  21H2 v1:
+    build: '22000.318'
+    editions:
+      Edu: false
+      Home: false
+      Pro: false
+    release: '2021.11'
+    version: 21H2 v1
+Windows 7:
+  SP1:
+    build: null
+    editions:
+      Home Premium: false
+      Professional: false
+      Ultimate: false
+    release: null
+    version: SP1
+Windows 8:
+  Update 3:
+    build: '9600'
+    editions:
+      N: false
+      Single Language: false
+      Standard: false
+    version: Update 3

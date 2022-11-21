@@ -1,0 +1,10 @@
+Installation
+*************
+
+The windupbox uses packer as well as VirtualBox in order to create the Vagrant Boxes.
+So please make sure both are installed/downloaded and make sure that the path of packer is added to the PATH environment variable.
+
+To install the tool clone the repository, navigate into the directory and run ``pip install .``.
+Run ``fwinpacker -v`` afterwards to check whether the tool is ready to use.
+
+

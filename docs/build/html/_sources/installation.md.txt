@@ -1,0 +1,4 @@
+# Installation
+
+To install the tool clone the repository, navigate into the directory and run ``pip install .``.
+Run ``fwinpacker -v`` afterwards to check whether the tool is ready.

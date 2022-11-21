@@ -1,0 +1,224 @@
+,code,name,bcp47code
+0,1025,Arabic - Saudi Arabia,ar-SA
+1,1026,Bulgarian,bg-BG
+2,1027,Catalan,ca-ES
+3,1028,Chinese - Taiwan,zh-TW
+4,1029,Czech,cs-CZ
+5,1030,Danish,da-DK
+6,1031,German - Germany,de-DE
+7,1032,Greek,el-GR
+8,1033,English - United States,en-US
+9,1034,Spanish - Spain (Traditional Sort),es-ES
+10,1035,Finnish,fi-FI
+11,1036,French - France,fr-FR
+12,1037,Hebrew,he-IL
+13,1038,Hungarian,hu-HU
+14,1039,Icelandic,is-IS
+15,1040,Italian - Italy,it-IT
+16,1041,Japanese,ja-JP
+17,1042,Korean,ko-KR
+18,1043,Dutch - Netherlands,nl-NL
+19,1044,Norwegian (Bokmål),nb-NO
+20,1045,Polish,pl-PL
+21,1046,Portuguese - Brazil,pt-BR
+22,1047,Rhaeto-Romanic,rm-CH
+23,1048,Romanian,ro-RO
+24,1049,Russian,ru-RU
+25,1050,Croatian,hr-HR
+26,1051,Slovak,sk-SK
+27,1052,Albanian - Albania,sq-AL
+28,1053,Swedish,sv-SE
+29,1054,Thai,th-TH
+30,1055,Turkish,tr-TR
+31,1056,Urdu - Pakistan,ur-PK
+32,1057,Indonesian,id-ID
+33,1058,Ukrainian,uk-UA
+34,1059,Belarusian,be-BY
+35,1060,Slovenian,sl-SI
+36,1061,Estonian,et-EE
+37,1062,Latvian,lv-LV
+38,1063,Lithuanian,lt-LT
+39,1064,Tajik,tg-Cyrl-TJ
+40,1065,Persian,fa-IR
+41,1066,Vietnamese,vi-VN
+42,1067,Armenian - Armenia,hy-AM
+43,1068,Azeri (Latin),az-Latn-AZ
+44,1069,Basque,eu-ES
+45,1070,Sorbian,wen-DE
+46,1071,F.Y.R.O. Macedonian,mk-MK
+47,1072,Sutu,st-ZA
+48,1073,Tsonga,ts-ZA
+49,1074,Tswana,tn-ZA
+50,1075,Venda,ven-ZA
+51,1076,Xhosa,xh-ZA
+52,1077,Zulu,zu-ZA
+53,1078,Afrikaans - South Africa,af-ZA
+54,1079,Georgian,ka-GE
+55,1080,Faroese,fo-FO
+56,1081,Hindi,hi-IN
+57,1082,Maltese,mt-MT
+58,1083,Sami,se-NO
+59,1084,Gaelic (Scotland),gd-GB
+60,1085,Yiddish,yi
+61,1086,Malay - Malaysia,ms-MY
+62,1087,Kazakh,kk-KZ
+63,1088,Kyrgyz (Cyrillic),ky-KG
+64,1089,Swahili,sw-KE
+65,1090,Turkmen,tk-TM
+66,1091,Uzbek (Latin),uz-Latn-UZ
+67,1092,Tatar,tt-RU
+68,1093,Bengali (India),bn-IN
+69,1094,Punjabi,pa-IN
+70,1095,Gujarati,gu-IN
+71,1096,Oriya,or-IN
+72,1097,Tamil,ta-IN
+73,1098,Telugu,te-IN
+74,1099,Kannada,kn-IN
+75,1100,Malayalam,ml-IN
+76,1101,Assamese,as-IN
+77,1102,Marathi,mr-IN
+78,1103,Sanskrit,sa-IN
+79,1104,Mongolian (Cyrillic),mn-MN
+80,1105,Tibetan - People's Republic of China,bo-CN
+81,1106,Welsh,cy-GB
+82,1107,Khmer,km-KH
+83,1108,Lao,lo-LA
+84,1109,Burmese,my-MM
+85,1110,Galician,gl-ES
+86,1111,Konkani,kok-IN
+87,1112,Manipuri,mni
+88,1113,Sindhi - India,sd-IN
+89,1114,Syriac,syr-SY
+90,1115,Sinhalese - Sri Lanka,si-LK
+91,1116,Cherokee - United States,chr-US
+92,1117,Inuktitut,iu-Cans-CA
+93,1118,Amharic - Ethiopia,am-ET
+94,1119,Tamazight (Arabic),tmz
+95,1120,Kashmiri (Arabic),ks-Arab-IN
+96,1121,Nepali,ne-NP
+97,1122,Frisian - Netherlands,fy-NL
+98,1123,Pashto,ps-AF
+99,1124,Filipino,fil-PH
+100,1125,Divehi,dv-MV
+101,1126,Edo,bin-NG
+102,1127,Fulfulde - Nigeria,fuv-NG
+103,1128,Hausa - Nigeria,ha-Latn-NG
+104,1129,Ibibio - Nigeria,ibb-NG
+105,1130,Yoruba,yo-NG
+106,1131,Quecha - Bolivia,quz-BO
+107,1132,Sepedi,nso-ZA
+108,1136,Igbo - Nigeria,ig-NG
+109,1137,Kanuri - Nigeria,kr-NG
+110,1138,Oromo,gaz-ET
+111,1139,Tigrigna - Ethiopia,ti-ER
+112,1140,Guarani - Paraguay,gn-PY
+113,1141,Hawaiian - United States,haw-US
+114,1142,Latin,la
+115,1143,Somali,so-SO
+116,1144,Yi,ii-CN
+117,1145,Papiamentu,pap-AN
+118,1152,Uighur - China,ug-Arab-CN
+119,1153,Maori - New Zealand,mi-NZ
+120,2049,Arabic - Iraq,ar-IQ
+121,2052,Chinese - People's Republic of China,zh-CN
+122,2055,German - Switzerland,de-CH
+123,2057,English - United Kingdom,en-GB
+124,2058,Spanish - Mexico,es-MX
+125,2060,French - Belgium,fr-BE
+126,2064,Italian - Switzerland,it-CH
+127,2067,Dutch - Belgium,nl-BE
+128,2068,Norwegian (Nynorsk),nn-NO
+129,2070,Portuguese - Portugal,pt-PT
+130,2072,Romanian - Moldava,ro-MD
+131,2073,Russian - Moldava,ru-MD
+132,2074,Serbian (Latin),sr-Latn-CS
+133,2077,Swedish - Finland,sv-FI
+134,2080,Urdu - India,ur-IN
+135,2092,Azeri (Cyrillic),az-Cyrl-AZ
+136,2108,Gaelic (Ireland),ga-IE
+137,2110,Malay - Brunei Darussalam,ms-BN
+138,2115,Uzbek (Cyrillic),uz-Cyrl-UZ
+139,2117,Bengali (Bangladesh),bn-BD
+140,2118,Punjabi (Pakistan),pa-PK
+141,2128,Mongolian (Mongolian),mn-Mong-CN
+142,2129,Tibetan - Bhutan,bo-BT
+143,2137,Sindhi - Pakistan,sd-PK
+144,2143,Tamazight (Latin),tzm-Latn-DZ
+145,2144,Kashmiri (Devanagari),ks-Deva-IN
+146,2145,Nepali - India,ne-IN
+147,2155,Quecha - Ecuador,quz-EC
+148,2163,Tigrigna - Eritrea,ti-ET
+149,3073,Arabic - Egypt,ar-EG
+150,3076,Chinese - Hong Kong SAR,zh-HK
+151,3079,German - Austria,de-AT
+152,3081,English - Australia,en-AU
+153,3082,Spanish - Spain (Modern Sort),es-ES
+154,3084,French - Canada,fr-CA
+155,3098,Serbian (Cyrillic),sr-Cyrl-CS
+156,3179,Quecha - Peru,quz-PE
+157,4097,Arabic - Libya,ar-LY
+158,4100,Chinese - Singapore,zh-SG
+159,4103,German - Luxembourg,de-LU
+160,4105,English - Canada,en-CA
+161,4106,Spanish - Guatemala,es-GT
+162,4108,French - Switzerland,fr-CH
+163,4122,Croatian (Bosnia/Herzegovina),hr-BA
+164,5121,Arabic - Algeria,ar-DZ
+165,5124,Chinese - Macao SAR,zh-MO
+166,5127,German - Liechtenstein,de-LI
+167,5129,English - New Zealand,en-NZ
+168,5130,Spanish - Costa Rica,es-CR
+169,5132,French - Luxembourg,fr-LU
+170,5146,Bosnian (Bosnia/Herzegovina),bs-Latn-BA
+171,6145,Arabic - Morocco,ar-MO
+172,6153,English - Ireland,en-IE
+173,6154,Spanish - Panama,es-PA
+174,6156,French - Monaco,fr-MC
+175,7169,Arabic - Tunisia,ar-TN
+176,7177,English - South Africa,en-ZA
+177,7178,Spanish - Dominican Republic,es-DO
+178,7180,French - West Indies,fr-029
+179,8193,Arabic - Oman,ar-OM
+180,8201,English - Jamaica,en-JM
+181,8202,Spanish - Venezuela,es-VE
+182,8204,French - Reunion,fr-RE
+183,9217,Arabic - Yemen,ar-YE
+184,9225,English - Caribbean,en-029
+185,9226,Spanish - Colombia,es-CO
+186,9228,French - Democratic Rep. of Congo,fr-CG
+187,10241,Arabic - Syria,ar-SY
+188,10249,English - Belize,en-BZ
+189,10250,Spanish - Peru,es-PE
+190,10252,French - Senegal,fr-SN
+191,11265,Arabic - Jordan,ar-JO
+192,11273,English - Trinidad,en-TT
+193,11274,Spanish - Argentina,es-AR
+194,11276,French - Cameroon,fr-CM
+195,12289,Arabic - Lebanon,ar-LB
+196,12297,English - Zimbabwe,en-ZW
+197,12298,Spanish - Ecuador,es-EC
+198,12300,French - Cote d'Ivoire,fr-CI
+199,13313,Arabic - Kuwait,ar-KW
+200,13321,English - Philippines,en-PH
+201,13322,Spanish - Chile,es-CL
+202,13324,French - Mali,fr-ML
+203,14337,Arabic - U.A.E.,ar-AE
+204,14345,English - Indonesia,en-ID
+205,14346,Spanish - Uruguay,es-UY
+206,14348,French - Morocco,fr-MA
+207,15361,Arabic - Bahrain,ar-BH
+208,15369,English - Hong Kong SAR,en-HK
+209,15370,Spanish - Paraguay,es-PY
+210,15372,French - Haiti,fr-HT
+211,16385,Arabic - Qatar,ar-QA
+212,16393,English - India,en-IN
+213,16394,Spanish - Bolivia,es-BO
+214,17417,English - Malaysia,en-MY
+215,17418,Spanish - El Salvador,es-SV
+216,18441,English - Singapore,en-SG
+217,18442,Spanish - Honduras,es-HN
+218,19466,Spanish - Nicaragua,es-NI
+219,20490,Spanish - Puerto Rico,es-PR
+220,21514,Spanish - United States,es-US
+221,58378,Spanish - Latin America,es-419
+222,58380,French - North Africa,fr-015

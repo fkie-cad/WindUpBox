@@ -1,0 +1,24 @@
+How to create a Windows Box
+****************************
+
+This tool enables users to create Windows Vagrant Boxes in a short time.
+It therefore uses packer and VirtualBox.
+Therefore the user can choose the *windows version* (e.g. Windows 10), *version* (e.g. 21H1),
+*edition* (e.g. Home), *language* (e.g. English), *architecture* (e.g. x64) of the system and can customize the box in a lot of different ways.
+A detailed overview and explanation can be found in the section :doc:`customizations`.
+After the system choice the tool will download the regarding system image from the microsoft website.
+Alternatively it is also possible to provide the system image by the -iso option.
+Afterwards the tool will install Windows using packer.
+Due to the large amount of different windows versions, editions and so on, not all could be tested so far.
+So if a special windows version is not working for you feel free to create a github issue or build a custom class for that version or edition.
+An tutorial on how to do that with less effort can be found in ... .
+
+
+To create a Vagrant Box for Windows you can run ``fwinpacker boxcreate %WINDOWSVERSION% %VERSION% %EDITION% %LANGUAGE% %ARCHITECTURE%``.
+As an example order to see the possible version for Windows
+
+
+.. toctree::
+    :hidden:
+
+    customizations

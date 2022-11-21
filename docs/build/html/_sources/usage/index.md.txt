@@ -1,0 +1,5 @@
+How to create a Windows Box
+****************************
+
+In order to create a minimal Windows Vagrant Box for Windows 10 Home in Version 21H1 with language English and architecture x64 the command
+``fwinpacker boxcreate 'Windows 10' '21H1' 'Home' 'German' 'x64'``.
