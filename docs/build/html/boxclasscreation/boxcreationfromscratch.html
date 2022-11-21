@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>create a boxcreator class from scratch &mdash; &#39;windupbox&#39; 0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> 'windupbox'
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basicusage/index.html">How to create a Windows Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functionality/index.html">A short insight into the box creation process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">How to create a boxcreator class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../addosoption/index.html">How to add an os specification to the os option list</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">'windupbox'</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>create a boxcreator class from scratch</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/boxclasscreation/boxcreationfromscratch.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="create-a-boxcreator-class-from-scratch">
+<h1>create a boxcreator class from scratch<a class="headerlink" href="#create-a-boxcreator-class-from-scratch" title="Permalink to this heading"></a></h1>
+<p>To create a boxcreator class from scratch it is needed to implement all functionality mentioned <a class="reference internal" href="index.html#boxcreator-functionality-steps"><span class="std std-ref">in the list above</span></a>.
+These are:</p>
+<ol class="arabic simple">
+<li><p>define specific os the boxcreator class should be used for</p></li>
+<li><p>download of the system image (if not provided)</p></li>
+<li><p>create OS specific files for the automated unattended os installation</p></li>
+<li><p>copy of provisioner scripts</p></li>
+<li><p>configure builder configuration variables, provisioners and postprocessors</p></li>
+</ol>
+<p>Steps 4 and 5 are already covered in the section above.
+Therefore in the following sections just cover how to define the os the boxcreator class should be used for , how to implement the os image download and how to create os specific files, that are needed for the box creation.</p>
+<p>We first start with the basic structure of each boxcreator class, which looks like the following:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># external imports</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># internal imports</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">windupbox.boxcreator.boxcreator</span> <span class="kn">import</span> <span class="n">BoxCreator</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">windupbox.winconstants.windowsinfo</span> <span class="kn">import</span> <span class="n">WindowsInfo</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="c1"># configure logging</span>
+<span class="linenos"> 9</span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="linenos">10</span><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="k">class</span> <span class="nc">CustomBoxCreator</span><span class="p">(</span><span class="n">BoxCreator</span><span class="p">):</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxdirectory</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+<span class="linenos">16</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">boxdirectory</span><span class="p">)</span>
+<span class="linenos">17</span>        <span class="c1"># you can be place methods that add provisioners, add builder configuration variables or create additional files here</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>    <span class="c1"># custom methods</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="k">def</span> <span class="nf">create_box</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">22</span>        <span class="c1"># if you have methods that should be done not in the initialization but right before the box creation, you can place them here</span>
+<span class="linenos">23</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">create_box</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In the following we will create such a boxcreator class for Windows 10.
+Because it would be way to much to explain every function needed we will just cover some basics, that help you understand how everything works.
+For details please look at the real Windows 10 boxcreator class and the Windows boxcreator class (located in <code class="docutils literal notranslate"><span class="pre">src/windupbox/boxcreator/provided/</span></code>).</p>
+<section id="specify-os">
+<h2>specify os<a class="headerlink" href="#specify-os" title="Permalink to this heading"></a></h2>
+<p>It is important to specify for which os and which version your boxcreator class should be used.
+To better understand how this is done properly we shortly explain how the tool chooses a boxcreator class for the input given in the command line interface.</p>
+<p>If a user run the tool, it provide them a list of os, versions, editions and so on.
+These data will be stored in an instance of the so called OsInfo class and determines which boxcreator class will be used for the box creation.
+Each boxcreator class contains an instance of the so called OsInfoFilter class, which is used to specify which os given through their OsInfo match with the filter.
+Therefore the OsInfoFilter has a method called match, which returns whether the OsInfo matches the filter.
+Additionally it provides the information how precise it matches the filter.</p>
+<p>For specific os, the characteristic data can vary.
+Therefore we work with childs of the OsInfo and OsInfoFilter class for certain os.
+So far the tool supports only windows, where the regarding classes are called WindowsInfo and WindowsInfoFilter.
+All this classes are located in the <code class="docutils literal notranslate"><span class="pre">src/windupbox/osinfo/</span></code> module.</p>
+<p>As an example let us say we just have two boxcreator called Windows10_21H1BoxCreator and Windows10_BoxCreator.
+In the Windows10_21H1BoxCreator class the os_info_filter has the value <code class="docutils literal notranslate"><span class="pre">WindowsInfoFilter(windows_version=['Windows</span> <span class="pre">10'],</span> <span class="pre">version=['21H1'])</span></code> while the Windows10_BoxCreator os_info_filter attribute is <code class="docutils literal notranslate"><span class="pre">WindowsInfoFilter(windows_version=['Windows</span> <span class="pre">10'])</span></code>.
+If the user now chooses any os_info containing ‘Windows 10’ as the windows version and ‘21H1’ as the version the Windows10_21H1BoxCreator class will be used, due to the fact it matches more precise.
+Accordingly if the user chooses any os_info containing ‘Windows 10’ and another windows version the Windows10_BoxCreator will be used.
+This provides the possibility to build a flexible structure, which allows small adjustments in the installation process for certain versions.</p>
+<p>If you create a new boxcreator class it may be needed for you to add options to the os selection in the command line interface.
+An tutorial on how to do that can be found <a class="reference internal" href="../addosoption/index.html#how-to-add-an-os-specification-to-the-os-option-list"><span class="std std-ref">here</span></a>.</p>
+</section>
+<section id="download-of-the-system-image">
+<h2>download of the system image<a class="headerlink" href="#download-of-the-system-image" title="Permalink to this heading"></a></h2>
+<p>For the download of the system image overload the _download_image method, that will download the system image and add the necessary builder configuration variables.
+We therefore first need to find the location where to place the system image.
+This can be done by using the _get_image_path method provided by the BoxCreator baseclass.
+Then you can download the image and set the attribute image to the filepath of the downloaded file.
+Because packer wants the sha256 checksum of the image, we then calculate the sha256 checksum by calling the _get_image_sha256checksum method, which is also provided by the BoxCreator baseclass.
+In a next step we determine the path of the image relative to our project directory, because this is needed for the packerfile.
+As a last step we add this relative path as well as the checksum of the iso to the builder configuration variables.
+The resulting code then looks something like the following:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># external imports</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># internal imports</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">windupbox.boxcreator.boxcreator</span> <span class="kn">import</span> <span class="n">BoxCreator</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">windupbox.winconstants.windowsinfo</span> <span class="kn">import</span> <span class="n">WindowsInfo</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="c1"># configure logging</span>
+<span class="linenos"> 9</span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="linenos">10</span><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="k">class</span> <span class="nc">CustomBoxCreator</span><span class="p">(</span><span class="n">BoxCreator</span><span class="p">):</span>
+<span class="linenos">14</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxdirectory</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+<span class="linenos">15</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">boxdirectory</span><span class="p">)</span>
+<span class="linenos">16</span>        <span class="c1"># you can be place methods that add provisioners, add builder configuration variables or create additional files here</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>    <span class="k">def</span> <span class="nf">_download_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">20</span>        <span class="n">filepath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_image_path</span><span class="p">()</span>
+<span class="linenos">21</span>        <span class="n">downloader</span> <span class="o">=</span> <span class="n">WindowsDownloader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">windows_info</span><span class="p">)</span>
+<span class="linenos">22</span>        <span class="n">downloader</span><span class="o">.</span><span class="n">download_iso</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+<span class="linenos">23</span>        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">filepath</span>
+<span class="linenos">24</span>        <span class="bp">self</span><span class="o">.</span><span class="n">image_sha256checksum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_image_sha256checksum</span><span class="p">()</span>
+<span class="linenos">25</span>        <span class="n">iso_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_directory</span><span class="p">)</span>
+<span class="linenos">26</span>        <span class="bp">self</span><span class="o">.</span><span class="n">source_attributes</span><span class="p">[</span><span class="s1">&#39;iso_urls&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">iso_url</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()]</span>
+<span class="linenos">27</span>        <span class="bp">self</span><span class="o">.</span><span class="n">source_attributes</span><span class="p">[</span><span class="s1">&#39;iso_checksum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;sha256:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">image_sha256checksum</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span>    <span class="k">def</span> <span class="nf">create_box</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">31</span>        <span class="c1"># if you have methods that should be done not in the initialization but right before the box creation, you can place them here</span>
+<span class="linenos">32</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">create_box</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>As already mentioned before, there is no need to call the _download_image method here due to the fact that it is called by the BoxCreator baseclass.</p>
+</section>
+<section id="creation-of-os-specific-files">
+<h2>creation of os specific files<a class="headerlink" href="#creation-of-os-specific-files" title="Permalink to this heading"></a></h2>
+<p>For most os installations additional files are needed that configure the installation process.
+Newer windows versions, such as Windows 8, 10 and 11 for instance use a so called <a class="reference external" href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/update-windows-settings-and-scripts-create-your-own-answer-file-sxs?view=windows-11">Autounattend.xml</a> file.
+These can be distributed to the packer virtual machine by a <a class="reference external" href="https://developer.hashicorp.com/packer/plugins/builders/virtualbox/iso#floppy-configuration">floppy drive</a> or a <a class="reference external" href="https://developer.hashicorp.com/packer/plugins/builders/virtualbox/iso#http-directory-configuration">http directory</a>.
+Dependent on the os it may be necessary to execute the file.
+Therefore in most cases the <a class="reference external" href="https://developer.hashicorp.com/packer/plugins/builders/virtualbox/iso#boot-configuration">boot command</a> is used.
+For windows systems no boot command is needed due to the fact that windows automatically finds the Autounattend.xml if provided through a drive, like the floppy drive.</p>
+<p>In the following section it is shortly shown how to add a file to the <a class="reference external" href="https://developer.hashicorp.com/packer/plugins/builders/virtualbox/iso#floppy-configuration">floppy drive</a>.
+We therefore create an Autounattend file using a minimal API for Autounattend files provided by this tool.
+We first setup the class as already done in the sections before and add a method where we create the Autounattend.xml and add it to the floppy files.
+Additionally we import the Autounattendfile class as well as the SynchronousCommand class from the winautounattendAPI module.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># external imports</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># internal imports</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">windupbox.boxcreator.boxcreator</span> <span class="kn">import</span> <span class="n">BoxCreator</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">windupbox.winconstants.windowsinfo</span> <span class="kn">import</span> <span class="n">WindowsInfo</span><span class="p">,</span> <span class="n">WindowsInfoFilter</span>
+<span class="hll"><span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">windupbox.winautounattendAPI.autounattendfile</span> <span class="kn">import</span> <span class="n">Autounantendfile</span><span class="p">,</span> <span class="n">SynchronousCommand</span>
+</span><span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="c1"># configure logging</span>
+<span class="linenos">10</span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="linenos">11</span><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="k">class</span> <span class="nc">CustomBoxCreator</span><span class="p">(</span><span class="n">BoxCreator</span><span class="p">):</span>
+<span class="linenos">15</span>    <span class="c1"># specify the Windows version the changes should apply</span>
+<span class="linenos">16</span>    <span class="n">box_creator_info</span><span class="p">:</span> <span class="n">WindowsInfoFilter</span> <span class="o">=</span> <span class="n">WindowsInfoFilter</span><span class="p">(</span>
+<span class="linenos">17</span>        <span class="n">windows_version</span><span class="o">=</span><span class="s1">&#39;Windows 10&#39;</span><span class="p">,</span>
+<span class="linenos">18</span>        <span class="n">version</span><span class="o">=</span><span class="s1">&#39;21H2&#39;</span><span class="p">,</span>
+<span class="linenos">19</span>    <span class="p">)</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxdirectory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">windows_info</span><span class="p">:</span> <span class="n">WindowsInfo</span><span class="p">):</span>
+<span class="linenos">22</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">boxdirectory</span><span class="p">,</span> <span class="n">windows_info</span><span class="p">)</span>
+<span class="hll"><span class="linenos">23</span>        <span class="bp">self</span><span class="o">.</span><span class="n">setup_os_specific_files</span><span class="p">()</span>
+</span><span class="linenos">24</span>
+<span class="hll"><span class="linenos">25</span>    <span class="k">def</span> <span class="nf">setup_os_specific_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">26</span>        <span class="k">pass</span>
+</span></pre></div>
+</div>
+<p>In a next step we create an Autounattendfile instance.
+Additionally we add a command to the Autounattend file, that will change the execution policy for windows powershell scripts.
+As a last step we can save the Autounattend file to the floppy directory, by using the save method of the class, which will return the path were the file is saved.
+The result looks like the following:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># external imports</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># internal imports</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">windupbox.boxcreator.boxcreator</span> <span class="kn">import</span> <span class="n">BoxCreator</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">windupbox.winconstants.windowsinfo</span> <span class="kn">import</span> <span class="n">WindowsInfo</span><span class="p">,</span> <span class="n">WindowsInfoFilter</span>
+<span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">windupbox.winautounattendAPI.autounattendfile</span> <span class="kn">import</span> <span class="n">Autounantendfile</span><span class="p">,</span> <span class="n">SynchronousCommand</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="c1"># configure logging</span>
+<span class="linenos">10</span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="linenos">11</span><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="k">class</span> <span class="nc">CustomBoxCreator</span><span class="p">(</span><span class="n">BoxCreator</span><span class="p">):</span>
+<span class="linenos">15</span>    <span class="c1"># specify the Windows version the changes should apply</span>
+<span class="linenos">16</span>    <span class="n">box_creator_info</span><span class="p">:</span> <span class="n">WindowsInfoFilter</span> <span class="o">=</span> <span class="n">WindowsInfoFilter</span><span class="p">(</span>
+<span class="linenos">17</span>        <span class="n">windows_version</span><span class="o">=</span><span class="s1">&#39;Windows 10&#39;</span><span class="p">,</span>
+<span class="linenos">18</span>        <span class="n">version</span><span class="o">=</span><span class="s1">&#39;21H2&#39;</span><span class="p">,</span>
+<span class="linenos">19</span>    <span class="p">)</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxdirectory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">windows_info</span><span class="p">:</span> <span class="n">WindowsInfo</span><span class="p">):</span>
+<span class="linenos">22</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">boxdirectory</span><span class="p">,</span> <span class="n">windows_info</span><span class="p">)</span>
+<span class="linenos">23</span>        <span class="bp">self</span><span class="o">.</span><span class="n">setup_os_specific_files</span><span class="p">()</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>    <span class="k">def</span> <span class="nf">setup_os_specific_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="hll"><span class="linenos">26</span>        <span class="n">autounantendfile</span> <span class="o">=</span> <span class="n">Autounantendfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">windows_info</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">27</span>        <span class="n">set_execution_policy</span> <span class="o">=</span> <span class="n">SynchronousCommand</span><span class="p">(</span>
+</span><span class="hll"><span class="linenos">28</span>            <span class="n">command</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;cmd.exe /c powershell -Command &quot;Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force&quot;&#39;</span><span class="p">,</span>
+</span><span class="hll"><span class="linenos">29</span>            <span class="n">description</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Set Execution Policy&#39;</span><span class="p">,</span>
+</span><span class="hll"><span class="linenos">30</span>        <span class="p">)</span>
+</span><span class="hll"><span class="linenos">31</span>        <span class="n">autounantendfile</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">set_execution_policy</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">32</span>        <span class="n">filepath_abs</span> <span class="o">=</span> <span class="n">autounantendfile</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">floppy_directory</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>No we need to add the relative path of our Autounattendfile to the floppy files.
+This can simply be done by appending the relative path to the floppy_files attribute of the boxcreator class.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># external imports</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># internal imports</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">windupbox.boxcreator.boxcreator</span> <span class="kn">import</span> <span class="n">BoxCreator</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">windupbox.winconstants.windowsinfo</span> <span class="kn">import</span> <span class="n">WindowsInfo</span><span class="p">,</span> <span class="n">WindowsInfoFilter</span>
+<span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">windupbox.winautounattendAPI.autounattendfile</span> <span class="kn">import</span> <span class="n">Autounantendfile</span><span class="p">,</span> <span class="n">SynchronousCommand</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="c1"># configure logging</span>
+<span class="linenos">10</span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="linenos">11</span><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="k">class</span> <span class="nc">CustomBoxCreator</span><span class="p">(</span><span class="n">BoxCreator</span><span class="p">):</span>
+<span class="linenos">15</span>    <span class="c1"># specify the Windows version the changes should apply</span>
+<span class="linenos">16</span>    <span class="n">box_creator_info</span><span class="p">:</span> <span class="n">WindowsInfoFilter</span> <span class="o">=</span> <span class="n">WindowsInfoFilter</span><span class="p">(</span>
+<span class="linenos">17</span>        <span class="n">windows_version</span><span class="o">=</span><span class="s1">&#39;Windows 10&#39;</span><span class="p">,</span>
+<span class="linenos">18</span>        <span class="n">version</span><span class="o">=</span><span class="s1">&#39;21H2&#39;</span><span class="p">,</span>
+<span class="linenos">19</span>    <span class="p">)</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxdirectory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">windows_info</span><span class="p">:</span> <span class="n">WindowsInfo</span><span class="p">):</span>
+<span class="linenos">22</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">boxdirectory</span><span class="p">,</span> <span class="n">windows_info</span><span class="p">)</span>
+<span class="linenos">23</span>        <span class="bp">self</span><span class="o">.</span><span class="n">setup_os_specific_files</span><span class="p">()</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>    <span class="k">def</span> <span class="nf">setup_os_specific_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">26</span>        <span class="n">autounantendfile</span> <span class="o">=</span> <span class="n">Autounantendfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">windows_info</span><span class="p">)</span>
+<span class="linenos">27</span>        <span class="n">set_execution_policy</span> <span class="o">=</span> <span class="n">SynchronousCommand</span><span class="p">(</span>
+<span class="linenos">28</span>            <span class="n">command</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;cmd.exe /c powershell -Command &quot;Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force&quot;&#39;</span><span class="p">,</span>
+<span class="linenos">29</span>            <span class="n">description</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Set Execution Policy&#39;</span><span class="p">,</span>
+<span class="linenos">30</span>        <span class="p">)</span>
+<span class="linenos">31</span>        <span class="n">autounantendfile</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">set_execution_policy</span><span class="p">)</span>
+<span class="linenos">32</span>        <span class="n">filepath_abs</span> <span class="o">=</span> <span class="n">autounantendfile</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">floppy_directory</span><span class="p">)</span>
+<span class="hll"><span class="linenos">33</span>        <span class="n">filepath_rel</span> <span class="o">=</span> <span class="n">filepath_abs</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_directory</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">34</span>        <span class="bp">self</span><span class="o">.</span><span class="n">floppy_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filepath_rel</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>As already mentioned this is just a small example, that should show you how its done in theory.
+The here created box will not work, because more scripts are needed.
+To have further insight have a look in the already existing boxcreator classes.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, FKIE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

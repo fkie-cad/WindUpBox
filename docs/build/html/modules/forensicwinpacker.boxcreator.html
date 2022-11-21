@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>windupbox.boxcreator package &mdash; &#39;windupbox&#39; 0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> 'windupbox'
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basicusage/index.html">How to create a Windows Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functionality/index.html">A short insight into the box creation process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../boxclasscreation/index.html">How to create a boxcreator class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../addosoption/index.html">How to add an os specification to the os option list</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">'windupbox'</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>windupbox.boxcreator package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/forensicwinpacker.boxcreator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="windupbox-boxcreator-package">
+<h1>windupbox.boxcreator package<a class="headerlink" href="#windupbox-boxcreator-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-windupbox.boxcreator.boxcreator">
+<span id="windupbox-boxcreator-boxcreator-module"></span><h2>windupbox.boxcreator.boxcreator module<a class="headerlink" href="#module-windupbox.boxcreator.boxcreator" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">windupbox.boxcreator.boxcreator.</span></span><span class="sig-name descname"><span class="pre">BoxCreator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">OsInfo</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>base class for all boxcreator classes, that implements basic structure that can be used as well as modified for specific boxcreator classes</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.VagrantfileTemplate">
+<span class="sig-name descname"><span class="pre">VagrantfileTemplate</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.VagrantfileTemplate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.base_directory">
+<span class="sig-name descname"><span class="pre">base_directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.base_directory" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.box_directory">
+<span class="sig-name descname"><span class="pre">box_directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.box_directory" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.cleanup">
+<span class="sig-name descname"><span class="pre">cleanup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.cleanup" title="Permalink to this definition"></a></dt>
+<dd><p>clean up the directory, by removing all used files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>full</strong> – if set to false the box directory and the logdirectory will be preserved</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.cleanup_active">
+<span class="sig-name descname"><span class="pre">cleanup_active</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.cleanup_active" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.create_box">
+<span class="sig-name descname"><span class="pre">create_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exclude_download</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.create_box" title="Permalink to this definition"></a></dt>
+<dd><p>create a box based on the provided attributes.
+this includes downloading the image, creating the Packerfile, running the Packerfile as well as cleaning up the temporary needed files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.disable_cleanup">
+<span class="sig-name descname"><span class="pre">disable_cleanup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.disable_cleanup" title="Permalink to this definition"></a></dt>
+<dd><p>disable the cleanup process used after the box creation is done.
+can be used to debug the build process.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.exclude_from_cleanup">
+<span class="sig-name descname"><span class="pre">exclude_from_cleanup</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.exclude_from_cleanup" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.floppy_directory">
+<span class="sig-name descname"><span class="pre">floppy_directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.floppy_directory" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.floppy_files">
+<span class="sig-name descname"><span class="pre">floppy_files</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.floppy_files" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.image">
+<span class="sig-name descname"><span class="pre">image</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.image" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.image_directory">
+<span class="sig-name descname"><span class="pre">image_directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.image_directory" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.image_pre_set">
+<span class="sig-name descname"><span class="pre">image_pre_set</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.image_pre_set" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.image_sha256checksum">
+<span class="sig-name descname"><span class="pre">image_sha256checksum</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.image_sha256checksum" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.label">
+<span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.label" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.os_info">
+<span class="sig-name descname"><span class="pre">os_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">OsInfo</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.os_info" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.os_info_filter">
+<span class="sig-name descname"><span class="pre">os_info_filter</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">OsInfoFilter</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.os_info_filter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.output_directory">
+<span class="sig-name descname"><span class="pre">output_directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.output_directory" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.package_script_directory">
+<span class="sig-name descname"><span class="pre">package_script_directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">WindowsPath('C:/Users/kuelp/AppData/Local/Programs/Python/Python310/lib/site-packages/windupbox/data/scripts')</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.package_script_directory" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.package_template_directory">
+<span class="sig-name descname"><span class="pre">package_template_directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">WindowsPath('C:/Users/kuelp/AppData/Local/Programs/Python/Python310/lib/site-packages/windupbox/data/templates')</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.package_template_directory" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.packer_variables">
+<span class="sig-name descname"><span class="pre">packer_variables</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.packer_variables" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.packerfile">
+<span class="sig-name descname"><span class="pre">packerfile</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="forensicwinpacker.packerAPI.html#windupbox.packerAPI.packerfile.Packerfile" title="windupbox.packerAPI.packerfile.Packerfile"><span class="pre">Packerfile</span></a></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.packerfile" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.postprocessors">
+<span class="sig-name descname"><span class="pre">postprocessors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="forensicwinpacker.packerAPI.html#windupbox.packerAPI.postprocessor.PostProcessor" title="windupbox.packerAPI.postprocessor.PostProcessor"><span class="pre">windupbox.packerAPI.postprocessor.PostProcessor</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.postprocessors" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.provisioners">
+<span class="sig-name descname"><span class="pre">provisioners</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="forensicwinpacker.packerAPI.html#windupbox.packerAPI.provisioner.Provisioner" title="windupbox.packerAPI.provisioner.Provisioner"><span class="pre">windupbox.packerAPI.provisioner.Provisioner</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.provisioners" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.scripts_directory">
+<span class="sig-name descname"><span class="pre">scripts_directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.scripts_directory" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.set_image">
+<span class="sig-name descname"><span class="pre">set_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.set_image" title="Permalink to this definition"></a></dt>
+<dd><p>used to set a fix image by a file path instead of downloading the image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – file path of the image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.source_attributes">
+<span class="sig-name descname"><span class="pre">source_attributes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.source_attributes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="windupbox.boxcreator.boxcreator.BoxCreator.vagrant_box_settings">
+<span class="sig-name descname"><span class="pre">vagrant_box_settings</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#windupbox.boxcreator.boxcreator.BoxCreator.vagrant_box_settings" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="windupbox-boxcreator-boxcreatorlog-module">
+<h2>windupbox.boxcreator.boxcreatorlog module<a class="headerlink" href="#windupbox-boxcreator-boxcreatorlog-module" title="Permalink to this heading"></a></h2>
+</section>
+<section id="windupbox-boxcreator-commands-module">
+<h2>windupbox.boxcreator.commands module<a class="headerlink" href="#windupbox-boxcreator-commands-module" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-windupbox.boxcreator.selector">
+<span id="windupbox-boxcreator-selector-module"></span><h2>windupbox.boxcreator.selector module<a class="headerlink" href="#module-windupbox.boxcreator.selector" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="windupbox.boxcreator.selector.select_boxcreator_by_windows_info">
+<span class="sig-prename descclassname"><span class="pre">windupbox.boxcreator.selector.</span></span><span class="sig-name descname"><span class="pre">select_boxcreator_by_windows_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">windows_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">WindowsInfo</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="forensicwinpacker.boxcreator.provided.html#windupbox.boxcreator.provided.windows.WindowsBoxCreator" title="windupbox.boxcreator.provided.windows.WindowsBoxCreator"><span class="pre">WindowsBoxCreator</span></a></span></span><a class="headerlink" href="#windupbox.boxcreator.selector.select_boxcreator_by_windows_info" title="Permalink to this definition"></a></dt>
+<dd><p>finds the best matching boxcreator class by their box_creator_info attribute.
+therefore if two matches are found the more precise on are used.
+So for instance if the filter of a boxcreator class B1 includes only windows_version and version and
+a filter of a boxcreator class B2 includes additionally the edition and both filters match the boxcreator class B2 will be used.</p>
+</dd></dl>
+
+</section>
+<section id="module-windupbox.boxcreator">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-windupbox.boxcreator" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, FKIE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
