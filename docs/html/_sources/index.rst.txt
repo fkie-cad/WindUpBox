@@ -4,11 +4,11 @@
    contain the root `toctree` directive.
 
 Welcome to windupbox's documentation!
-=============================================
+=====================================
 
 Welcome to the documentation of *windupbox* - a command line utility for easily creating custom and minimal Windows Vagrant Boxes.
 
-The documentation provides in section :doc:`basicusage/index` an a short walk through how to create a Windows Vagrant Box.
+The documentation provides in section :doc:`basics/howtocreateawindowsbox/index` an a short walk through how to create a Windows Vagrant Box.
 
 .. toctree::
    :hidden:
@@ -16,7 +16,6 @@ The documentation provides in section :doc:`basicusage/index` an a short walk th
    :caption: Contents:
 
    installation/index
-   basicusage/index
+   basics/index
    functionality/index
-   boxclasscreation/index
-   addosoption/index
+   advanced/index

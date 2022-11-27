@@ -22,4 +22,4 @@ Accordingly if the user chooses any os_info containing 'Windows 10' and another 
 This provides the possibility to build a flexible structure, which allows small adjustments in the installation process for certain versions.
 
 If you create a new boxcreator class it may be needed for you to add options to the os selection in the command line interface.
-An tutorial on how to do that can be found :ref:`here <How to add an os specification to the os option list>`.
+An tutorial on how to do that can be found ... .

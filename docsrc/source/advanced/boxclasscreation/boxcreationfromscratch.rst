@@ -1,5 +1,5 @@
 create a boxcreator class from scratch
-**************************************
+######################################
 
 To create a boxcreator class from scratch it is needed to implement all functionality mentioned :ref:`in the list above <boxcreator_functionality_steps>`.
 These are:

@@ -16,11 +16,10 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="How to create a Windows Box" href="../basicusage/index.html" />
+    <link rel="next" title="Basic Usage" href="../basics/index.html" />
     <link rel="prev" title="Welcome to windupbox’s documentation!" href="../index.html" /> 
 </head>
 
@@ -31,6 +30,9 @@
         <div class="wy-side-nav-search" >
             <a href="../index.html" class="icon icon-home"> 'windupbox'
           </a>
+              <div class="version">
+                0.0.1
+              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -41,11 +43,14 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../basicusage/index.html">How to create a Windows Box</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../functionality/index.html">A short insight into the box creation process</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../boxclasscreation/index.html">How to create a boxcreator class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../addosoption/index.html">How to add an os specification to the os option list</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tested-configurations">Tested Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/index.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functionality/index.html">Functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/index.html">Advanced Topics</a></li>
 </ul>
 
         </div>
@@ -74,13 +79,42 @@
              
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
-<p>To install the windupbox clone the repository, navigate into the directory and simply run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code>.
+<p>To install the windupbox clone the <a class="reference external" href="https://github.com/fkie-cad/WindUpBox">repository</a>, navigate into the directory and run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code>.
 To check whether the tool is successfully installed and ready to use run <code class="docutils literal notranslate"><span class="pre">windupbox</span> <span class="pre">-v</span></code>.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
 <p>To use the tools main functionality of creation vagrant boxes two programs are required.
 The first one is <a class="reference external" href="https://www.virtualbox.org/">VirtualBox</a> , which is used as a hypervisor in the box creation process.
 As a second tool <a class="reference external" href="https://www.packer.io/">packer</a> will be used for automating the os installation process and creating the vagrant box.
 Before using the tool make sure that VirtualBox is installed and that packer is downloaded.
 Additionally it is needed to add the packer executable path to the PATH environment variable.</p>
+</section>
+<section id="tested-configurations">
+<h2>Tested Configurations<a class="headerlink" href="#tested-configurations" title="Permalink to this heading"></a></h2>
+<p>The tool was tested with the following versions of Python, packer and VirtualBox:</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>program</p></th>
+<th class="head"><p>versions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Python</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3.8</span></code>, <code class="docutils literal notranslate"><span class="pre">3.9</span></code>, <code class="docutils literal notranslate"><span class="pre">3.10</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>VirtualBox</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">6.1</span></code>, <code class="docutils literal notranslate"><span class="pre">7.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>packer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.8.0</span></code>, <code class="docutils literal notranslate"><span class="pre">1.8.1</span></code>, <code class="docutils literal notranslate"><span class="pre">1.8.2</span></code>, <code class="docutils literal notranslate"><span class="pre">1.8.3</span></code>, <code class="docutils literal notranslate"><span class="pre">1.8.4</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 
 
@@ -88,7 +122,7 @@ Additionally it is needed to add the packer executable path to the PATH environm
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to windupbox’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../basicusage/index.html" class="btn btn-neutral float-right" title="How to create a Windows Box" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../basics/index.html" class="btn btn-neutral float-right" title="Basic Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

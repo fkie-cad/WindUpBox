@@ -2,6 +2,8 @@
 from windupbox.osinfo.database import print_table, return_if_exists
 from windupbox.osinfo.database_modifications import add_windowsinfo_to_database, remove_windowsinfo_to_database, set_tested
 from windupbox.osinfo.windowsinfo import WindowsInfo
+from windupbox.windowswebsitescraper.isoscraper.isolistupdate import WindowsIsoListUpdater
+from windupbox.helperFunctions.input.yesnoinput import yesnoinput
 from ._parse_parameters import get_windowsinfo_if_valid, parse_osinfo_argument
 
 # configure logging
@@ -77,3 +79,16 @@ def os_set_tested(arguments):
         log.error('os can not be set to tested in database due to missing attributes in the provided windows info')
         return
     set_tested(windows_info)
+
+
+def os_update(arguments):
+    """
+        cli function to update the list of available windows images and writes all regarding os information to the os information database
+    """
+    updater = WindowsIsoListUpdater()
+    answer = yesnoinput(
+        'The update process takes some time due to the scraping process of the microsoft website. Are you sure you wanna continue? ')
+    if not answer:
+        return
+    updater.update()
+

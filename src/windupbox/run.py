@@ -9,14 +9,14 @@ import pkg_resources
 # internal imports
 from windupbox.setup_logging import setup_logging
 from windupbox.helperFunctions.argparse.formatter import SmartFormatter
-from windupbox.cli.update import update
-from windupbox.cli.os import os_list, os_add, os_remove, os_set_tested
+from windupbox.cli.os import os_list, os_add, os_remove, os_set_tested, os_update
 from windupbox.cli.boxcreate import boxcreate
 from windupbox.cli.showversion import show_version
 from windupbox.osinfo.constants import DATABASE_FILE_OSINFO
 
 
 def run():
+    # todo: update help messages
     start_time = time.time()
 
     parser = argparse.ArgumentParser()
@@ -30,10 +30,6 @@ def run():
     parser.set_defaults(func=lambda args: show_version(args, parser))
 
     subparsers = parser.add_subparsers(dest='subcommand')
-
-    # subcommand update
-    parser_update = subparsers.add_parser('update', help=f'update the iso list by scraping microsoft website')
-    parser_update.set_defaults(func=update)
 
     # subcommand boxcreate
     parser_boxcreate = subparsers.add_parser('boxcreate',
@@ -99,10 +95,13 @@ def run():
     parser_osadd.set_defaults(func=os_add)
 
     # subcommand os/remove
-    parser_remove = subparsers_os.add_parser('remove',
+    parser_osremove = subparsers_os.add_parser('remove',
                                              help='remove os information from os options (from os_info database)', formatter_class=SmartFormatter)
-    parser_remove.add_argument('windows_info', type=str, help=windows_info_help_message)
-    parser_remove.set_defaults(func=os_remove)
+    parser_osremove.add_argument('windows_info', type=str, help=windows_info_help_message)
+    parser_osremove.set_defaults(func=os_remove)
+
+    parser_osupdate = subparsers_os.add_parser('update',  help='update the database by scraping the microsoft website for available isos')
+    parser_osupdate.set_defaults(func=os_update)
 
     # # subcommand recover
     # parser_recover = subparsers_os.add_parser('recover')
