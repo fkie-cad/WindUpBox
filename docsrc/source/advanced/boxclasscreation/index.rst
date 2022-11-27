@@ -1,9 +1,8 @@
-*********************************
-How to create a boxcreator class
+Create a boxcreator class
 *********************************
 
 A boxcreator class defines how a Vagrant box for a specific OS, version, edition and so on will be created.
-Before you start with the creation a boxcreator class, it is really helpful to first read the chapter :ref:`functionality` to better understand how the creation of a box works.
+Before you start with the creation a boxcreator class, it is really helpful to first read the chapter :doc:`/functionality/index` to better understand how the creation of a box works.
 Additionally it is recommended to have a basic knowledge of `packer <https://www.packer.io/>`_ and the way how this tool performs the box creation process.
 
 Creating a new boxcreator class can be done by extending the BoxCreator baseclass, which provides some functionality of a box creation.
@@ -31,7 +30,7 @@ Orange marked are those, who just implement a part of the functionality needed t
 Those are used to share some attributes and methods between their childs.
 Blue marked are the boxcreator classes implementing the full functionality of creating a box.
 
-.. image:: ../img/boxcreator_class_hierarchy.svg
+.. image:: _img/boxcreator_class_hierarchy.svg
 
 .. include:: smalladjustments.rst
 

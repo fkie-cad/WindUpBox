@@ -1,5 +1,5 @@
 small and easy doable adjustments
-*********************************
+#################################
 
 We start with showing in a simple example how to change, set and delete builder configuration variables (stored in the source_attributes attribute), provisioners and postprocessors.
 Therefore we create a *boxcreator class*, that should be used for all editions, languages and architectures for the windows version Windows 10 in version 21H1.

@@ -31,5 +31,5 @@ clean_install:
 	${PYTHON} -m pip install .
 
 
-documentation:
+doc:
 	${PYTHON} setup.py build_sphinx
