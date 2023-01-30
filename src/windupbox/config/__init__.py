@@ -5,7 +5,7 @@ DEBUG = False
 
 # set program details
 NAME = 'fwinpacker'
-VERSION = '1.0.0'
+VERSION = '0.0.2'
 
 # timestamp format
 TIMESTAMP_FORMAT = '%Y-%m-%dT%H:%M:%S.%f%z'

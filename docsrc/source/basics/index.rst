@@ -17,7 +17,7 @@ An walk through on how to that can be found in :doc:`/basics/howtocreateawindows
    downloadwindows/index
    howtocreateawindowsbox/index
 
-..
+.. can be used to show its on first site
     .. include:: listavailablesystems/index.rst
     .. include:: downloadwindows/index.rst
     .. include:: howtocreateawindowsbox/index.rst
