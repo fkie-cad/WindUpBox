@@ -14,9 +14,10 @@ An walk through on how to that can be found in :doc:`/basics/howtocreateawindows
    :caption: Contents:
 
    listavailablesystems/index
+   downloadwindows/index
    howtocreateawindowsbox/index
 
 ..
     .. include:: listavailablesystems/index.rst
-
+    .. include:: downloadwindows/index.rst
     .. include:: howtocreateawindowsbox/index.rst
