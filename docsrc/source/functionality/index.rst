@@ -18,10 +18,10 @@ The creation of a box contains the following major steps:
 
 Before getting started with explaining each step in more detail we shortly explain the two terms #provisioner# and #builder configuration variables#, which are used a lot in the following.
 
-#provisioners# are used to configure the system and install additional software after the OS is installed.
+*provisioners* are used to configure the system and install additional software after the OS is installed.
 This tool mainly uses the `PowerShell Provisioner <https://developer.hashicorp.com/packer/docs/provisioners/powershell>`_ to do this task on windows systems.
 
-#builder configuration variables# are the configuration variables for the builder used by packer (in our case its the VirtualBox ISO Builder).
+*builder configuration variables* are the configuration variables for the builder used by packer (in our case its the VirtualBox ISO Builder).
 These contain information about the vm such as used cpus, memory and VRAM as well as much other configurations used for the OS installation process.
 A full list of the possible configuration parameters and their meaning can be found in `this section <https://developer.hashicorp.com/packer/plugins/builders/virtualbox/iso>`_ of the packer documentation.
 

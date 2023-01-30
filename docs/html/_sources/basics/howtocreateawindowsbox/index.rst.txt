@@ -18,7 +18,7 @@ After the successful execution of the tool you will find a directory in your cur
 This directory contains a log directory with logfiles of the creation process as well as a box directory with the created box file, ready to use with vagrant.
 
 In order to see all available systems run ``windup os list -a``.
-.. Further information on how to filter the available os can be found in the section ... .
+Further information on how to filter the available os can be found in the section :doc:`/basics/listavailablesystems/index` .
 
 Due to the large amount of different windows versions, editions and so on, not all are tested so far.
 If a specific windows version is not working for you feel free to create a github issue or even better build a custom so called *boxcreator class* addressing the differences.

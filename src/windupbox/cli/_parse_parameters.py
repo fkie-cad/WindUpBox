@@ -1,8 +1,15 @@
+# external imports
+from pathlib import Path
+
 # internal imports
 from windupbox.helperFunctions.strings.strtolist import str_to_list
 from windupbox.osinfo.windowsinfo import WindowsInfo
 from windupbox.helperFunctions.strings.strtodict import str_to_keyval
 from windupbox.osinfo.database import print_table, return_if_exists
+from windupbox.windowswebsitescraper.bcp47scraper.search import check_bcp47_code, language_to_bcp47
+from windupbox.helperFunctions.input.listselectioninput import listselectinput
+from windupbox.helperFunctions.input.yesnoinput import yesnoinput
+from windupbox.boxcreator.provided.windows import WindowsBoxCreator
 
 # configure logging
 import logging
@@ -93,6 +100,38 @@ def get_windowsinfo_for_creation(os_info_string: str) -> WindowsInfo or None:
         return None
     return windows_info
 
+def determine_bcp47(arguments, windows_info: WindowsInfo) -> str or None:
+    bcp47 = None
+    if arguments.bcp47:
+        if check_bcp47_code(arguments.bcp47):
+            bcp47 = arguments.bcp47
+        else:
+            log.error(f'the provided bcp47 code {arguments.bcp47} does not exist')
+    else:
+        log.info(f'no bcp47 provided')
+    if not bcp47:
+        possible_bcp_codes = language_to_bcp47(windows_info.language)
+        if not possible_bcp_codes:
+            log.error(
+                f'no bcp47 code for language {windows_info.language} could be found -> therefore no box can be created')
+            return None
+        if len(possible_bcp_codes) == 1:
+            bcp47 = possible_bcp_codes[0]
+            message = f'the tool suggest to use the bcp47 code {bcp47}. If you want to continue with this bcp47 code, ' \
+                      f'press yes if not press no and restart the tool with the -bcp option to specify the bcp47 code '
+            result = yesnoinput(message)
+            if not result:
+                return None
+        else:
+            str_stop = 'stop the tool'
+            options = possible_bcp_codes + [str_stop]
+            message = f'\nFor your chosen language multiple bcp47 codes are suggested - please choose one. '
+            result = listselectinput(message, options)
+            if result == str_stop:
+                return None
+            else:
+                bcp47 = result
+    return bcp47
 
 
 

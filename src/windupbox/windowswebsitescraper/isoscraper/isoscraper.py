@@ -5,11 +5,13 @@ from pyquery import PyQuery as pq
 import json
 from pathlib import Path
 import pkg_resources
+import ast
 
 # internal imports
 from windupbox.osinfo.windowsinfo import WindowsInfo
 from windupbox.windowswebsitescraper.isoscraper.constants import *
 from windupbox.helperFunctions.web.download import download
+from windupbox.helperFunctions.strings.strtodict import dict_str_insert_quotes_to_values
 
 # configure logging
 import logging
@@ -96,14 +98,12 @@ class WindowsDownloadLinkCreatorDynamic(WindowsDownloadLinkCreator):
             return False
         return True
 
-    def get_link(self) -> str:
-        if not self.check_if_link_creation_is_possible():
-            return ''
-        session_id = str(uuid.uuid4())
-        code = self._determine_code_for_windows_info()
-        language_code_dict = self._scrap_possible_languages(session_id, code)
-        language_code = self._select_language(language_code_dict)
-        return self._scrap_download_link(session_id, self.windows_info.language, language_code)
+    def _whitelist_session_id(self, session_id):
+        url = f'https://vlscppe.microsoft.com/tags?org_id=y6jn8c31&session_id={session_id}'
+        headers = {
+            "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0",
+        }
+        req = requests.get(url, headers=headers)
 
     def _determine_code_for_windows_info(self) -> int or None:
         try:
@@ -134,8 +134,9 @@ class WindowsDownloadLinkCreatorDynamic(WindowsDownloadLinkCreator):
             "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0",
             "Referer": fr'https://www.microsoft.com/software-download/{self.windowsversion_id}'
         }
-        payload = r"controlAttributeMapping:"
-        req = requests.post(language_selection_url, data=payload, headers=headers)
+        # payload = r"controlAttributeMapping:"
+        # add data=payload to add payload
+        req = requests.post(language_selection_url, headers=headers)
         query = pq(req.content)
         language_select = query('#product-languages')
         language_id_dict = {}
@@ -167,27 +168,40 @@ class WindowsDownloadLinkCreatorDynamic(WindowsDownloadLinkCreator):
             "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0",
             "Referer": fr'https://www.microsoft.com/software-download/{self.windowsversion_id}'
         }
-        payload = r"controlAttributeMapping:"
-        req = requests.post(download_url, data=payload, headers=headers)
+        req = requests.post(download_url, headers=headers)
         if not self._check_response_for_blocked_error(req.content):
             return ''
         query = pq(req.content)
-        buttons = query('.button, .button-long, .button-flat, .button-purple')
+        product_download_inputs = query('.product-download-hidden')
+
         supported_architectures = dict()
-        for b in buttons:
+        for inp in product_download_inputs:
+            value_dict_string = dict_str_insert_quotes_to_values(inp.attrib['value'])
+            dict_product_download = ast.literal_eval(value_dict_string)
             try:
-                download_url = b.attrib['href']
+                download_url = dict_product_download['Uri']
+                arch = dict_product_download['DownloadType']
             except KeyError:
                 continue
-            arch = [x.text for x in b.getchildren()][0]
             if arch in ARCHITECTURE_MAPPING.keys():
                 supported_architectures[ARCHITECTURE_MAPPING[arch]] = download_url
+
         self.supported_architectures = list(supported_architectures.keys())
         if supported_architectures:
             if return_possible_architectures_instead:
                 return list(supported_architectures.keys())
             return supported_architectures[self.windows_info.architecture]
         return ''
+
+    def get_link(self) -> str:
+        if not self.check_if_link_creation_is_possible():
+            return ''
+        session_id = str(uuid.uuid4())
+        self._whitelist_session_id(session_id)
+        code = self._determine_code_for_windows_info()
+        language_code_dict = self._scrap_possible_languages(session_id, code)
+        language_code = self._select_language(language_code_dict)
+        return self._scrap_download_link(session_id, self.windows_info.language, language_code)
 
     def get_supported_languages_and_architectures(self) -> dict:
         supported_language_and_architectures = dict()

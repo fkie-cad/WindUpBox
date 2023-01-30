@@ -59,15 +59,23 @@ def get_table_as_list(database_path: Path = DATABASE_FILE_OSINFO, select: list =
     return results
 
 
-def print_table(database_path: Path = DATABASE_FILE_OSINFO, select: list = None, filters: dict = None):
+def print_table(database_path: Path = DATABASE_FILE_OSINFO, select: list = None, filters: dict = None, as_list=False):
     """
         print certain os information from the os information database dependent on filters (:param filters) and a column selections (:param select)
     """
     if not select:
         select = ['windows_version', 'version', 'edition', 'language', 'architecture', 'tested']
     table_data = get_table_as_list(database_path=database_path, select=select, filters=filters)
-    table = prettytable.PrettyTable()
-    table.field_names = select
-    table_data_listformat = [[getattr(windows_info, attribute) for attribute in select] for windows_info in table_data]
-    table.add_rows(table_data_listformat)
-    print(table)
+    if as_list:
+        select = ['windows_version', 'version', 'edition', 'language', 'architecture']
+        table_data_listformat = [[getattr(windows_info, attribute) for attribute in select] for windows_info in
+                                 table_data]
+        for element in table_data_listformat:
+            print(','.join(element))
+    else:
+        table = prettytable.PrettyTable()
+        table_data_listformat = [[getattr(windows_info, attribute) for attribute in select] for windows_info in
+                                 table_data]
+        table.field_names = select
+        table.add_rows(table_data_listformat)
+        print(table)

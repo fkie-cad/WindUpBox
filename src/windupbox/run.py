@@ -9,7 +9,7 @@ import pkg_resources
 # internal imports
 from windupbox.setup_logging import setup_logging
 from windupbox.helperFunctions.argparse.formatter import SmartFormatter
-from windupbox.cli.os import os_list, os_add, os_remove, os_set_tested, os_update
+from windupbox.cli.os import os_list, os_add, os_remove, os_set_tested, os_update, os_download
 from windupbox.cli.boxcreate import boxcreate
 from windupbox.cli.showversion import show_version
 from windupbox.osinfo.constants import DATABASE_FILE_OSINFO
@@ -67,6 +67,7 @@ def run():
 
     # subcommand os
     parser_os = subparsers.add_parser('os', help=f'subparser to show and modify the available os options')
+    parser_os.set_defaults(func=parser_os.print_help)
     subparsers_os = parser_os.add_subparsers()
 
     # subcommand os/list
@@ -81,6 +82,7 @@ def run():
                                 ') \navailable columns: windows_version, version, edition, language, ' \
                                 'architecture, build (optional), release (optional), tested \n(e.g. -f \'windows_version=Windows 10,edition=Pro\')'
     parser_oslist.add_argument('-f', '--filter', help=parser_oslist_filter_help)
+    parser_oslist.add_argument('-fi', '--format_as_input', help=f'format such that in can be copied line per line for e.g the os download subcommand', action='store_true')
     parser_oslist.set_defaults(func=lambda args: os_list(args, parser_oslist))
 
     windows_info_help_message = 'R|windows info in key value style (key=value) seperated ' \
@@ -111,6 +113,16 @@ def run():
     parser_settested = subparsers_os.add_parser('set_tested', help='set tested attribute of os information to True', formatter_class=SmartFormatter)
     parser_settested.add_argument('windows_info', type=str, help=windows_info_help_message)
     parser_settested.set_defaults(func=os_set_tested)
+
+    # subcommand download
+    parser_download = subparsers_os.add_parser('download',
+                                             help=f'download an specific windows iso',
+                                             formatter_class=SmartFormatter)
+    parser_download.add_argument('osinfo', help=help_message_osinfo)
+    parser_download.add_argument('-d', '--output-directory', help='filepath of downloaded file')
+    parser_download.add_argument('-bcp', '--bcp47', type=str,
+                                  help='specify the bcp47 code used for the language for keyboard layout and installation - to see a full list look here https://learn.microsoft.com/en-us/openspecs/office_standards/ms-oe376/6c085406-a698-4e12-9d4d-c3b0ee3dbc4a')
+    parser_download.set_defaults(func=os_download)
 
     # parse args
     args = parser.parse_args()

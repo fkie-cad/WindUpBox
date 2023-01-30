@@ -16,11 +16,12 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Advanced Topics" href="../advanced/index.html" />
-    <link rel="prev" title="Basic Usage" href="../basics/index.html" /> 
+    <link rel="prev" title="Create a Windows Box" href="../basics/howtocreateawindowsbox/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -97,9 +98,9 @@
 <li><p>run packer to create a vagrant box</p></li>
 </ol>
 <p>Before getting started with explaining each step in more detail we shortly explain the two terms #provisioner# and #builder configuration variables#, which are used a lot in the following.</p>
-<p>#provisioners# are used to configure the system and install additional software after the OS is installed.
+<p><em>provisioners</em> are used to configure the system and install additional software after the OS is installed.
 This tool mainly uses the <a class="reference external" href="https://developer.hashicorp.com/packer/docs/provisioners/powershell">PowerShell Provisioner</a> to do this task on windows systems.</p>
-<p>#builder configuration variables# are the configuration variables for the builder used by packer (in our case its the VirtualBox ISO Builder).
+<p><em>builder configuration variables</em> are the configuration variables for the builder used by packer (in our case its the VirtualBox ISO Builder).
 These contain information about the vm such as used cpus, memory and VRAM as well as much other configurations used for the OS installation process.
 A full list of the possible configuration parameters and their meaning can be found in <a class="reference external" href="https://developer.hashicorp.com/packer/plugins/builders/virtualbox/iso">this section</a> of the packer documentation.</p>
 <section id="finding-the-proper-class-for-box-creation">
@@ -161,7 +162,7 @@ At last the temporary files needed for the packer build process, such as the Pac
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../basics/index.html" class="btn btn-neutral float-left" title="Basic Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../basics/howtocreateawindowsbox/index.html" class="btn btn-neutral float-left" title="Create a Windows Box" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../advanced/index.html" class="btn btn-neutral float-right" title="Advanced Topics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

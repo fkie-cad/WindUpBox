@@ -1,10 +1,15 @@
+# external imports
+from pathlib import Path
+
 # internal imports
 from windupbox.osinfo.database import print_table, return_if_exists
 from windupbox.osinfo.database_modifications import add_windowsinfo_to_database, remove_windowsinfo_to_database, set_tested
 from windupbox.osinfo.windowsinfo import WindowsInfo
 from windupbox.windowswebsitescraper.isoscraper.isolistupdate import WindowsIsoListUpdater
 from windupbox.helperFunctions.input.yesnoinput import yesnoinput
-from ._parse_parameters import get_windowsinfo_if_valid, parse_osinfo_argument
+from ._parse_parameters import get_windowsinfo_if_valid, parse_osinfo_argument, determine_bcp47, get_windowsinfo_for_creation
+from windupbox.windowswebsitescraper.isoscraper.isoscraper import WindowsDownloader
+from windupbox.helperFunctions.strings.replace import replace_multiple_strings
 
 # configure logging
 import logging
@@ -15,6 +20,9 @@ def os_list(arguments, parser):
     """
         cli function to list available os by filtering the output and selecting certain columns
     """
+    as_list = False
+    if arguments.format_as_input:
+        as_list = True
     if arguments.filter or arguments.select_columns:
         filter_dict = dict()
         select_list = []
@@ -31,9 +39,9 @@ def os_list(arguments, parser):
                 else:
                     log.warning(f'windows info class does not have the attribute {arg[1]} -> this attribute will be therefore be ignored')
             select_list += list(keyword_args.keys())
-        print_table(select=select_list, filters=filter_dict)
+        print_table(select=select_list, filters=filter_dict, as_list=as_list)
     elif arguments.show_all:
-        print_table()
+        print_table(as_list=as_list)
     else:
         parser.print_help()
 
@@ -91,4 +99,33 @@ def os_update(arguments):
     if not answer:
         return
     updater.update()
+
+
+def os_download(arguments):
+    """
+        download a specific windows image from microsoft website
+    """
+    directory = Path('.')
+    if arguments.output_directory:
+        directory = Path(arguments.output_directory)
+
+    windows_info = get_windowsinfo_if_valid(arguments.osinfo)
+    if not windows_info:
+        log.error(f'provided windows information is missing key -> please provide all necessary attributes')
+        return
+
+    forbidden_chars = ['.', ' ', '-']
+    windows_version_filename = replace_multiple_strings(windows_info.windows_version, forbidden_chars, '')
+    edition_filename = replace_multiple_strings(windows_info.edition, forbidden_chars, '')
+    version_filename = replace_multiple_strings(windows_info.version, forbidden_chars, '')
+    language_filename = replace_multiple_strings(windows_info.language, forbidden_chars, '')
+    isofilename = f'{windows_version_filename}_{edition_filename}_{version_filename}_{language_filename}.iso'
+    iso_path = directory/isofilename
+
+    downloader = WindowsDownloader(windows_info)
+    success = downloader.download_iso(iso_path)
+    if not success:
+        log.error(f'iso download failed')
+        exit(1)
+    log.info(f'iso download was successful')
 

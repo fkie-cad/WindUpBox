@@ -40,10 +40,10 @@ class WindowsIsoListUpdater:
         # create session and add objects
         with Session(engine) as session:
             for windows_version in SUPPORTED_WINDOWS_VERSIONS:
-                print(windows_version)
+                # print(windows_version)
                 link_mapping = WINDOWS_LINK_MAPPING[windows_version]
                 code_mapping = WINDOWS_CODE_MAPPING[windows_version]
-                print(link_mapping, code_mapping)
+                # print(link_mapping, code_mapping)
                 for mapping in [link_mapping, code_mapping]:
                     if mapping:
                         for version in mapping.keys():
@@ -64,6 +64,8 @@ class WindowsIsoListUpdater:
                                     time.sleep(0.5)
                                     for lang in lang_arch_dict.keys():
                                         for arch in lang_arch_dict[lang]:
+                                            print(f'(added) ({windows_version}, {version}, {edition}, {lang}, {arch})')
+                                            log.info(f'add ({windows_version}, {version}, {edition}, {lang}, {arch}) to database')
                                             windows_info = WindowsInfo(
                                                 windows_version=windows_version,
                                                 version=version,
