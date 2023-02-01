@@ -67,7 +67,7 @@ def run():
 
     # subcommand os
     parser_os = subparsers.add_parser('os', help=f'subparser to show and modify the available os options')
-    parser_os.set_defaults(func=parser_os.print_help)
+    parser_os.set_defaults(func=lambda args: parser_os.print_help())
     subparsers_os = parser_os.add_subparsers()
 
     # subcommand os/list
